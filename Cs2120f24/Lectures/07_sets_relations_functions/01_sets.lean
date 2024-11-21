@@ -126,7 +126,7 @@ proof development to complete this simple proof. We give you the
 or introduction on the right to start.
 -/
 
-example : small 1 := (Or.inr (_))
+example : small 1 := (Or.inr (Or.inl rfl))
 
 /-!
 ### Set Theory Notation
@@ -167,6 +167,12 @@ specify the same small set.
 -/
 
 def s2 : Set Nat := { n : Nat | n = 0 ∨ n = 1 ∨ n = 2 ∨ n = 3 ∨ n = 4 }
+
+def noNat : Set Nat := {n : Nat | False}
+def allNat : Set Nat := {n : Nat | True}
+
+example : 3 ∈ noNat := _
+
 /-!
 We pronounce the expression (to the right of the := of course) as
 *the set of values, n, of type Nat, such that n = 0 ∨ n = 1 ∨ n = 2 ∨
@@ -187,6 +193,12 @@ striped balls. Answer: { b : Ball | Striped b }. Read this expression
 in English as *the set of all balls, b, such that b is striped*, or
 more concisely and naturally simply as *the set of all striped balls*.
 -/
+
+axiom Ball : Type
+axiom Striped : Ball → Prop
+def sb : Set Ball := { b : Ball | Striped b }
+
+def ssb : Set (Set Ball) := { sb }
 
 /-!
 ### Aside On Homogeneity
